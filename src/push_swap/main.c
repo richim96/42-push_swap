@@ -17,48 +17,48 @@
 static int	ft_is_sorted(t_list *stack)
 {
 	int	limit;
-	int	idx;
+	int	index;
 
 	limit = ((t_content *)stack->content)->index;
 	stack = stack->next;
 	while (stack)
 	{
-		idx = ((t_content *)stack->content)->index;
-		if (idx < limit)
+		index = ((t_content *)stack->content)->index;
+		if (index < limit)
 			return (FALSE);
-		limit = idx;
+		limit = index;
 		stack = stack->next;
 	}
 	return (TRUE);
 }
 
 /* Sort a numerical array using a second stack as sorting buffer. */
-static void	ft_sort(t_list **stack, int min)
+static void	ft_sort(t_list **stack, int stack_size, int min_index)
 {
 	t_list	*stack_b;
 
 	stack_b	= NULL;
-	if (ft_lstsize(*stack) == 2
+	if (stack_size == 2
 		&& ((int *)(*stack)->content)[1] > ((int *)(*stack)->next->content)[1])
 		ft_swap_top(stack, "sa");
-	else if (ft_lstsize(*stack) <= 20)
+	else if (stack_size <= 20)
 	{
-		while (ft_lstsize(*stack) > 3)
+		while (ft_lstsize(*stack))
 		{
-			if (*(int *)(*stack)->next->content == min)
+			if (*(int *)(*stack)->next->content == min_index)
 				ft_rotate(stack, "ra");
 			else
-				while(*(int *)(*stack)->content != min)
+				while(*(int *)(*stack)->content != min_index)
 					ft_rotate_reverse(stack, "rra");
 			ft_push_top(&stack_b, stack, "pb");
-			min++;
+			min_index++;
 		}
 		ft_three_sort(stack);
 		while (stack_b)
 			ft_push_top(stack, &stack_b, "pa");
 	}
 	else
-		ft_bin_radix_sort(stack, &stack_b, ft_lstsize(*stack));
+		ft_bin_radix_sort(stack, &stack_b, stack_size);
 }
 
 int	main(int argc, char **argv)
@@ -71,15 +71,12 @@ int	main(int argc, char **argv)
 	else
 		ft_stack_make(&stack, ++argv, argc);
 	if (!stack)
-	{
-		ft_putendl_fd("Error", 2);
-		return (1);
-	}
+		ft_error("Error.");
 	ft_stack_index(&stack);
 	if (!ft_is_sorted(stack))
-		ft_sort(&stack, 0);
+		ft_sort(&stack, ft_lstsize(stack), 0);
 	if (!ft_is_sorted(stack))
-		ft_error("The algorithm failed to sort the stack.\n");
+		ft_error("The algorithm failed to sort the stack.");
 	ft_lstclear(&stack, free);
 	return (0);
 }

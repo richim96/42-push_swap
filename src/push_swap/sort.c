@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:06:13 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/30 22:07:30 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 01:16:07 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_bin_radix_sort(t_list **stack, t_list **stack_b, int stack_size)
 	int			max_bits;
 	t_content	*content;
 
-	ft_stack_index(stack);
 	bits = 0;
 	max_bits = ft_max_bits_count(*stack);
 	while (bits < max_bits)

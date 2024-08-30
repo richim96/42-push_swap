@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 16:01:23 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/22 15:42:32 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 01:05:42 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	ft_error(char *msg)
 	char	*error;
 
 	error = ft_strjoin("[ERROR] - ", msg);
-	ft_putstr_fd(error, 2);
+	ft_putendl_fd(error, 2);
 	free(error);
 	exit(1);
 }

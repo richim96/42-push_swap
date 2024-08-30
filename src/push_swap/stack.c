@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:19:45 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/30 23:12:42 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 01:09:03 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static void	ft_args_to_stack(t_list **stack, char **args, int pos)
 		{
 			free(content);
 			ft_lstclear(stack, free);
-			ft_error("Malloc failed. No free memory for the stack.\n");
+			ft_error("Malloc failed. No free memory for the stack.");
 		}
 		ft_lstadd_back(stack, node);
 		pos++;
