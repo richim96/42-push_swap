@@ -6,11 +6,11 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:19:45 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 01:09:03 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 12:40:06 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "utils.h"
 
 /* Validate `n` as a non-duplicate integer (of size `int`). */
 static int	ft_n_is_valid(int n, char *arg, t_list **stack)
@@ -91,4 +91,23 @@ void	ft_stack_make(t_list **stack, char **args, int argc)
 			free(split_args[pos++]);
 		free(split_args);
 	}
+}
+
+/* Check if the given stack is sorted. */
+int	ft_stack_is_sorted(t_list *stack)
+{
+	int	limit;
+	int	n;
+
+	limit = ((t_content *)stack->content)->n;
+	stack = stack->next;
+	while (stack)
+	{
+		n = ((t_content *)stack->content)->n;
+		if (n < limit)
+			return (FALSE);
+		limit = n;
+		stack = stack->next;
+	}
+	return (TRUE);
 }

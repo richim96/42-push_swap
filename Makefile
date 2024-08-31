@@ -6,21 +6,26 @@
 #    By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 12:07:28 by rmei              #+#    #+#              #
-#    Updated: 2024/08/30 17:20:20 by rmei             ###   ########.fr        #
+#    Updated: 2024/08/31 14:16:27 by rmei             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### -- VARIABLES -- ####
+# Utils
+UTILS_SRC = index.c moves.c stack.c
+UTILS_SRC := $(addprefix src/utils/, ${UTILS_SRC})
+
 # Push Swap
-PSWAP_SRC = main.c \
-	push_swap_rotate.c sort.c stack.c
+PSWAP_SRC = main.c sort.c
 PSWAP_SRC := $(addprefix src/push_swap/, ${PSWAP_SRC})
+PSWAP_SRC += $(UTILS_SRC)
 PSWAP_OBJS = $(PSWAP_SRC:%.c=%.o)
 NAME = push_swap
 
 # Checker
-CHECKER_SRC = checker.c
+CHECKER_SRC = main.c
 CHECKER_SRC := $(addprefix src/checker/, ${CHECKER_SRC})
+CHECKER_SRC += $(UTILS_SRC)
 CHECKER_OBJS = $(CHECKER_SRC:%.c=%.o)
 CHECKER = checker
 
@@ -39,7 +44,7 @@ bonus: __lib $(CHECKER)
 
 # Create external libraries #
 __lib:
-	@make -sC $(LIBFT)
+	make -C $(LIBFT)
 
 # Create executables
 $(NAME): $(PSWAP_OBJS)
@@ -53,13 +58,13 @@ $(CHECKER): $(CHECKER_OBJS)
 	
 # Manage object files and executables #
 clean:
-	make clean -sC $(LIBFT)
+	make clean -C $(LIBFT)
 	rm -f $(PSWAP_OBJS) $(CHECKER_OBJS)
 
 fclean: 
-	make fclean -sC $(LIBFT)
+	make fclean -C $(LIBFT)
 	rm -f $(PSWAP_OBJS) $(NAME) $(CHECKER_OBJS) $(CHECKER)
 
-re: fclean all
+re: fclean all bonus
 
 .PHONY: all clean fclean re

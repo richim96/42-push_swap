@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:32:12 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/27 12:26:10 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 14:36:28 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,8 @@
 # define CHECKER_H
 
 # include "libft.h"
+# include "utils.h"
+
+# define MAX_INPUT 64
 
 #endif

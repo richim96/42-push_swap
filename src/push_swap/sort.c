@@ -6,42 +6,11 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:06:13 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 01:16:07 by rmei             ###   ########.fr       */
+/*   Updated: 2024/08/31 13:51:37 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_list	*ft_min_node_get(t_list *stack)
-{
-	t_list		*min;
-	t_content	*content;
-
-	min = NULL;
-	while (stack)
-	{
-		content = stack->content;
-		if (content->index == -1)
-			if (!min || content->n < ((t_content *)min->content)->n)
-				min = stack;
-		stack = stack->next;
-	}
-	return (min);
-}
-
-void	ft_stack_index(t_list **stack)
-{
-	t_list	*min_node;
-    int     curr_index;
-
-    curr_index = 0;
-    min_node = ft_min_node_get(*stack);
-    while (min_node)
-    {
-		((t_content *)min_node->content)->index = curr_index++;
-        min_node = ft_min_node_get(*stack);
-    }
-}
 
 /* Count the bits of the biggest number in the stack. */
 static int	ft_max_bits_count(t_list *stack)
@@ -65,7 +34,7 @@ static int	ft_max_bits_count(t_list *stack)
 }
 
 /* Binary radix sort operating in `O(nlogn)` time and `O(1)` space. */
-void	ft_bin_radix_sort(t_list **stack, t_list **stack_b, int stack_size)
+static void	ft_radix_sort(t_list **stack, t_list **stack_b, int stack_size)
 {
 	int			i;
 	int			bits;
@@ -91,28 +60,66 @@ void	ft_bin_radix_sort(t_list **stack, t_list **stack_b, int stack_size)
 	}
 }
 
-/* Sort a stack of three integers. */
-void	ft_three_sort(t_list **stack)
+/* Sort a stack of three integers based on their index. */
+static void	ft_three_sort(t_list **stack)
 {
-	t_content	*first;
-	t_content	*second;
-	t_content	*third;
+	int	first;
+	int	second;
+	int	third;
 
-	first = (*stack)->content;
-	second = (*stack)->next->content;
-	third = (*stack)->next->next->content;
-	if (first->n > second->n && first->n < third->n)
+	first = *(int *)(*stack)->content;
+	second = *(int *)(*stack)->next->content;
+	third = *(int *)(*stack)->next->next->content;
+	if (first > second && first < third)
 		ft_swap_top(stack, "sa");
-	else if (first->n > second->n && first->n > third->n)
+	else if (first > second && first > third)
 	{
 		ft_rotate(stack, "ra");
-		if (second->n > third->n)
+		if (second > third)
 			ft_swap_top(stack, "sa");
 	}
-	else if (second->n > third->n)
+	else if (second > third)
 	{
 		ft_rotate_reverse(stack, "rra");
-		if (third->n > first->n)
+		if (third > first)
 			ft_swap_top(stack, "sa");
+	}
+}
+
+/* Sort a stack with a `rotate-to-minimum` approach. */
+static void	ft_naive_sort(t_list **stack, t_list **stack_b, int min_index)
+{
+	while (ft_lstsize(*stack) > 3)
+	{
+		if (*(int *)(*stack)->next->content == min_index)
+			ft_rotate(stack, "ra");
+		else
+			while(*(int *)(*stack)->content != min_index)
+				ft_rotate_reverse(stack, "rra");
+		ft_push_top(stack_b, stack, "pb");
+		min_index++;
+	}
+	ft_three_sort(stack);
+	while (*stack_b)
+		ft_push_top(stack, stack_b, "pa");
+}
+
+/* Sort a numerical array using a second stack as sorting buffer. */
+void	ft_sort(t_list **stack, int len, int min_index)
+{
+	t_list	*stack_b;
+
+	stack_b	= NULL;
+	ft_stack_index(stack);
+	if (len == 2)
+		ft_swap_top(stack, "sa");
+	else if (len <= 20)
+		ft_naive_sort(stack, &stack_b, min_index);
+	else
+		ft_radix_sort(stack, &stack_b, len);
+	if (!ft_stack_is_sorted(*stack))
+	{
+		ft_lstclear(stack, free);
+		ft_error("Sorting failed. The stack is not ready.");
 	}
 }
