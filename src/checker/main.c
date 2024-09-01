@@ -6,26 +6,30 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:34:42 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 14:47:19 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/01 19:09:04 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "checker.h"
 
-void	ft_sort_checker(char *moves, t_list **stack)
+/* Read an input stream from the CLI. */
+static char	*ft_input_stream_read(void)
 {
-	if (!ft_stack_is_sorted(*stack))
+	char	input[MAX_INPUT];
+	char	*input_sequence;
+
+	input_sequence = "\0";
+	ft_memset(input, 0, MAX_INPUT);
+	while (read(STDIN_FILENO, input, MAX_INPUT - 1))
 	{
-		free(moves);
-		ft_lstclear(stack, free);
-		ft_putendl_fd("KO", STDERR_FILENO);
-		exit(1);
-	}	
+		input_sequence = ft_strjoin(input_sequence, input);
+		ft_bzero(input, MAX_INPUT);
+	}
+	return (input_sequence);
 }
 
 int	main(int argc, char **argv)
 {
-	char	command[MAX_INPUT];
 	char	*moves;
 	t_list	*stack;
 
@@ -35,16 +39,10 @@ int	main(int argc, char **argv)
 	ft_stack_make(&stack, ++argv, argc);
 	if (!stack)
 		ft_error("Invalid list.");
-	moves = "\0";
-	ft_memset(command, 0, MAX_INPUT);
-	while (read(STDIN_FILENO, command, MAX_INPUT - 1))
+	moves = ft_input_stream_read();
+	if (*moves)
 	{
-		moves = ft_strjoin(moves, command);
-		ft_bzero(command, MAX_INPUT);
-	}
-	if (moves)
-	{
-		ft_sort_checker(moves, &stack);
+		ft_sort(moves, &stack);
 		free(moves);
 	}
 	ft_lstclear(&stack, free);

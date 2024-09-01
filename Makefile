@@ -6,7 +6,7 @@
 #    By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 12:07:28 by rmei              #+#    #+#              #
-#    Updated: 2024/08/31 14:16:27 by rmei             ###   ########.fr        #
+#    Updated: 2024/09/01 18:29:01 by rmei             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ PSWAP_OBJS = $(PSWAP_SRC:%.c=%.o)
 NAME = push_swap
 
 # Checker
-CHECKER_SRC = main.c
+CHECKER_SRC = main.c sort.c
 CHECKER_SRC := $(addprefix src/checker/, ${CHECKER_SRC})
 CHECKER_SRC += $(UTILS_SRC)
 CHECKER_OBJS = $(CHECKER_SRC:%.c=%.o)

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap_rotate.c                                 :+:      :+:    :+:   */
+/*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:59:37 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/30 18:28:10 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/01 18:42:56 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	ft_swap_top(t_list **stack, char *msg)
 	t_list	*head;
 	void	*head_content;
 
-	if (!(*stack)->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	head = *stack;
 	head_content = head->content;
@@ -52,7 +52,7 @@ void	ft_rotate(t_list **stack, char *msg)
 	t_list	*head;
 	t_list	*tail;
 
-	if (!(*stack)->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	head = *stack;
 	*stack = head->next;
@@ -69,7 +69,7 @@ void	ft_rotate_reverse(t_list **stack, char *msg)
 	t_list	*head;
 	t_list	*tail;
 
-	if (!(*stack)->next)
+	if (!(*stack) || !(*stack)->next)
 		return ;
 	head = *stack;
 	tail = ft_lstlast(head);
