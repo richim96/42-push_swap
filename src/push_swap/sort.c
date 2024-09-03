@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/30 15:06:13 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 13:51:37 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:21:23 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ static void	ft_naive_sort(t_list **stack, t_list **stack_b, int min_index)
 		if (*(int *)(*stack)->next->content == min_index)
 			ft_rotate(stack, "ra");
 		else
-			while(*(int *)(*stack)->content != min_index)
+			while (*(int *)(*stack)->content != min_index)
 				ft_rotate_reverse(stack, "rra");
 		ft_push_top(stack_b, stack, "pb");
 		min_index++;
@@ -109,7 +109,7 @@ void	ft_sort(t_list **stack, int len, int min_index)
 {
 	t_list	*stack_b;
 
-	stack_b	= NULL;
+	stack_b = NULL;
 	ft_stack_index(stack);
 	if (len == 2)
 		ft_swap_top(stack, "sa");

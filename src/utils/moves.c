@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/23 14:59:37 by rmei              #+#    #+#             */
-/*   Updated: 2024/09/01 18:42:56 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:23:43 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 /* Push the top element of 'stack2' on the top of 'stack1'. */
 void	ft_push_top(t_list **stack1, t_list **stack2, char *msg)
 {
-    t_list  *head1;
-    
+	t_list	*head1;
+
 	if (!*stack2)
-        return ;
-    head1 = *stack2;
-    *stack2 = (*stack2)->next;
+		return ;
+	head1 = *stack2;
+	*stack2 = (*stack2)->next;
 	if (!*stack1)
 		head1->next = NULL;
 	else
 		head1->next = *stack1;
-    *stack1 = head1;
+	*stack1 = head1;
 	if (msg)
 		ft_putendl_fd(msg, 1);
 }

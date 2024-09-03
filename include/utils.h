@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:57:05 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 12:43:11 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:13:30 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct s_content
 {
-    int index;
-    int n;
-} t_content;
+	int	index;
+	int	n;
+}	t_content;
 
 /* index.c */
 
@@ -34,7 +34,7 @@ void	ft_rotate_reverse(t_list **stack, char *msg);
 
 /* stack.c */
 
-int     ft_stack_is_sorted(t_list *stack);
+int		ft_stack_is_sorted(t_list *stack);
 void	ft_stack_make(t_list **stack, char **args, int argc);
 
 #endif

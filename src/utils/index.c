@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/31 12:42:09 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 12:44:03 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:26:34 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,13 @@ static t_list	*ft_min_node_get(t_list *stack)
 void	ft_stack_index(t_list **stack)
 {
 	t_list	*min_node;
-    int     curr_index;
+	int		curr_index;
 
-    curr_index = 0;
-    min_node = ft_min_node_get(*stack);
-    while (min_node)
-    {
+	curr_index = 0;
+	min_node = ft_min_node_get(*stack);
+	while (min_node)
+	{
 		((t_content *)min_node->content)->index = curr_index++;
-        min_node = ft_min_node_get(*stack);
-    }
+		min_node = ft_min_node_get(*stack);
+	}
 }

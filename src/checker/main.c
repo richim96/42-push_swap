@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/21 15:34:42 by rmei              #+#    #+#             */
-/*   Updated: 2024/09/01 19:09:04 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:33:46 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,10 @@ int	main(int argc, char **argv)
 	stack = NULL;
 	ft_stack_make(&stack, ++argv, argc);
 	if (!stack)
-		ft_error("Invalid list.");
+	{
+		ft_putendl_fd("Error", STDERR_FILENO);
+		return (1);
+	}
 	moves = ft_input_stream_read();
 	if (*moves)
 	{

@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/29 17:19:45 by rmei              #+#    #+#             */
-/*   Updated: 2024/08/31 12:40:06 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/03 12:22:21 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_n_is_valid(int n, char *arg, t_list **stack)
 /* Create the content of the list node. */
 static t_content	*ft_content_make(int n)
 {
-	t_content *content;
+	t_content	*content;
 
 	content = malloc(sizeof(t_content));
 	if (!content)
