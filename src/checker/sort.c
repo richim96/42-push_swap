@@ -6,7 +6,7 @@
 /*   By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/01 18:25:50 by rmei              #+#    #+#             */
-/*   Updated: 2024/09/03 12:20:29 by rmei             ###   ########.fr       */
+/*   Updated: 2024/09/04 13:15:06 by rmei             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ static int	ft_move(char **moves, t_list **stack, t_list **stack_b)
 		free(move);
 		free(moves[pos++]);
 	}
-	free(moves);
 	return (success);
 }
 
@@ -94,10 +93,11 @@ void	ft_sort(char *moves, t_list **stack)
 	stack_b = NULL;
 	split_moves = ft_split(moves, '\n');
 	success = ft_move(split_moves, stack, &stack_b);
+	free(split_moves);
 	if (success && ft_stack_is_sorted(*stack) && stack_b == NULL)
 		return ;
 	free(moves);
-	if (*stack)
+	if (stack)
 		ft_lstclear(stack, free);
 	if (stack_b)
 		ft_lstclear(&stack_b, free);

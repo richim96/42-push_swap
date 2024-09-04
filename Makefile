@@ -6,14 +6,14 @@
 #    By: rmei <rmei@student.42.fr>                  +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/21 12:07:28 by rmei              #+#    #+#              #
-#    Updated: 2024/09/01 18:29:01 by rmei             ###   ########.fr        #
+#    Updated: 2024/09/04 13:28:24 by rmei             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 #### -- VARIABLES -- ####
 # Utils
 UTILS_SRC = index.c moves.c stack.c
-UTILS_SRC := $(addprefix src/utils/, ${UTILS_SRC})
+UTILS_SRC := $(addprefix src/shared_utils/, ${UTILS_SRC})
 
 # Push Swap
 PSWAP_SRC = main.c sort.c
